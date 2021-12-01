@@ -5,10 +5,10 @@ fn d1_sum() {
     let inp = fs::read_to_string("./input.txt").unwrap();
     let nums: Vec<u32> = inp.lines().map(|v| v.parse::<u32>().unwrap()).collect();
     let res = nums
-                        .iter()
-                        .tuple_windows()
-                        .filter(|(f, s)| f < s)
-                        .count();
+            .iter()
+            .tuple_windows()
+            .filter(|(f, s)| f < s)
+            .count();
     println!("part1: {}", res);
 }
 
