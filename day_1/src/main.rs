@@ -31,7 +31,7 @@ fn part_2(nums: &Vec<u32>) -> u32 {
         .unwrap()
 }
 
-fn bench<T>(f: fn(T) -> u32, args: T, msg: &str) {
+fn bench<T,R>(f: fn(T) -> R, args: T, msg: &str) {
     let n = Instant::now();
     f(args);
     let time = n.elapsed().as_nanos();
