@@ -2,7 +2,7 @@ use itertools::Itertools;
 use std::fs;
 use std::time::Instant;
 
-fn d1_sum(nums: &Vec<u32>) -> u32 {
+fn part_1(nums: &Vec<u32>) -> u32 {
     nums.iter()
         .tuple_windows()
         .filter(|(f, s)| f < s)
@@ -20,7 +20,7 @@ fn d1_sum_noiter(nums: &Vec<u32>) -> u32 {
     }
     num
 }
-fn d3_sum(nums: &Vec<u32>) -> u32 {
+fn part_2(nums: &Vec<u32>) -> u32 {
     nums.iter()
         .tuple_windows::<(_, _, _)>()
         .map(|(f, s, t)| f + s + t)
@@ -30,18 +30,19 @@ fn d3_sum(nums: &Vec<u32>) -> u32 {
         .try_into()
         .unwrap()
 }
-fn bench(f: fn(&Vec<u32>) -> u32, args: &Vec<u32>, msg: &str) {
+
+fn bench<T>(f: fn(T) -> u32, args: T, msg: &str) {
     let n = Instant::now();
     f(args);
     let time = n.elapsed().as_nanos();
-    println!("time elapsed since function call - {} :{} ", msg, time);
+    println!("time elapsed since function call - {} :{} ns ", msg, time);
 }
 fn main() {
     let inp = fs::read_to_string("./input.txt").unwrap();
     let nums: Vec<u32> = inp.lines().map(|v| v.parse::<u32>().unwrap()).collect();
 
-    println!("part1: {}", d1_sum(&nums));
-    println!("part2: {}", d3_sum(&nums));
-    bench(d1_sum, &nums, "part 1 iter");
-    bench(d3_sum, &nums, "part 2 iter");
+    println!("part1: {}", part_1(&nums));
+    println!("part2: {}", part_2(&nums));
+    bench(part_1, &nums, "part 1 iter");
+    bench(part_2, &nums, "part 2 iter");
 }
