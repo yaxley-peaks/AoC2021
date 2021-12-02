@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use std::fs;
 
-fn solve(inp: String) -> (u32,u32) {
+fn solve(inp: String) -> (u32, u32) {
     let inp = inp
         .lines()
         .map(|x| x.split(" ").collect_tuple::<(_, _)>().unwrap())
@@ -33,7 +33,7 @@ fn solve(inp: String) -> (u32,u32) {
     (length * depth, length * depth2)
 }
 
-fn bench<T,R>(f: fn(T) -> R, args: T, msg: &str) {
+fn bench<T, R>(f: fn(T) -> R, args: T, msg: &str) {
     use std::time::Instant;
     let n = Instant::now();
     f(args);
@@ -43,9 +43,9 @@ fn bench<T,R>(f: fn(T) -> R, args: T, msg: &str) {
 
 fn main() {
     let inp = fs::read_to_string("./input.txt").unwrap();
-    let (x,y) = solve(inp.clone());
+    let (x, y) = solve(inp.clone());
 
     bench(solve, inp.clone(), "part1");
 
-    println!("{} {}" , x, y);
+    println!("{} {}", x, y);
 }
