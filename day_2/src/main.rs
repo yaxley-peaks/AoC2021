@@ -1,6 +1,7 @@
 use itertools::Itertools;
 use std::fs;
-fn main() {
+
+fn part1(){
     let inp = fs::read_to_string("./input.txt").unwrap();
     let inp = inp
         .lines()
@@ -20,4 +21,16 @@ fn main() {
         }
     }
     println!("{}", length*depth);
+}
+
+fn part2(){
+    let inp = fs::read_to_string("./input.txt").unwrap();
+    let inp = inp
+        .lines()
+        .map(|x| x.split(" ").collect_tuple::<(_, _)>().unwrap())
+        .map(|(f,s)| (f , s.parse::<u32>().unwrap()))
+        .collect::<Vec<(_, _)>>();
+}
+fn main() {
+    part1();
 }
