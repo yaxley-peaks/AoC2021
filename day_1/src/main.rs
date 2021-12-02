@@ -31,7 +31,18 @@ fn part_2(nums: &Vec<u32>) -> u32 {
         .unwrap()
 }
 
-fn bench<T,R>(f: fn(T) -> R, args: T, msg: &str) {
+fn part_2_noiter(nums: &Vec<u32>) -> u32 {
+    let mut cnt = 0;
+    for i in 3..nums.len() {
+        //we can skip the middle two numbers because they cancel out
+        if nums[i] > nums[i - 3] {
+            cnt += 1;
+        }
+    }
+    cnt
+}
+
+fn bench<T, R>(f: fn(T) -> R, args: T, msg: &str) {
     let n = Instant::now();
     f(args);
     let time = n.elapsed().as_nanos();
@@ -43,6 +54,9 @@ fn main() {
 
     println!("part1: {}", part_1(&nums));
     println!("part2: {}", part_2(&nums));
+    
     bench(part_1, &nums, "part 1 iter");
+    bench(d1_sum_noiter, &nums, "part 1 no iter");
     bench(part_2, &nums, "part 2 iter");
+    bench(part_2_noiter, &nums, "part 2 no iter");
 }
