@@ -22,7 +22,7 @@ int part2(std::vector<int> nums){
     return cnt;
 }
 int main() {
-    std::ifstream file("./input.txt");
+    std::ifstream file("../input.txt");
     std::string word;
     std::vector<int> nums;
     while (std::getline(file, word)) {
