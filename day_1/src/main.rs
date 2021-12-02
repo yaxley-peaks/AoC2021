@@ -31,6 +31,17 @@ fn part_2(nums: &Vec<u32>) -> u32 {
         .unwrap()
 }
 
+//not really optimised lol this is even slower
+//why?
+fn part_2_optimised(nums: &Vec<u32>) -> u32 {
+    nums.iter()
+        .tuple_windows::<(_, _, _, _)>()
+        .filter(|(f, _, _, l)| f < l)
+        .count()
+        .try_into()
+        .unwrap()
+}
+
 fn part_2_noiter(nums: &Vec<u32>) -> u32 {
     let mut cnt = 0;
     for i in 3..nums.len() {
@@ -54,9 +65,10 @@ fn main() {
 
     println!("part1: {}", part_1(&nums));
     println!("part2: {}", part_2(&nums));
-    
+
     bench(part_1, &nums, "part 1 iter");
     bench(d1_sum_noiter, &nums, "part 1 no iter");
     bench(part_2, &nums, "part 2 iter");
     bench(part_2_noiter, &nums, "part 2 no iter");
+    bench(part_2_optimised, &nums, "part 2 optimised");
 }
