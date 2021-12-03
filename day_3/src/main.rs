@@ -20,6 +20,39 @@ fn part1(nums: &[u32]) -> u32 {
     x * y
 }
 
+fn part1_bad(){
+    let inp = fs::read_to_string("./input.txt").unwrap();
+    let inp = inp.lines().map(|x| x.chars().collect::<Vec<_>>()).collect::<Vec<_>>();
+
+    let mut gamma = Vec::new();
+    let mut epsilon = Vec::new();
+
+    let (mut zero, mut one) = (0,0);
+    for i in 0..inp[0].len(){
+        zero = 0;
+        one = 0;
+        for x in &inp{
+            // println!("{}" ,);
+            if x[i] == '0'{
+                zero += 1;
+            }else{
+                one += 1;
+            }
+        }
+        if one > zero {
+            gamma.push('1');
+            epsilon.push('0');
+
+        }else{
+            gamma.push('0');
+            epsilon.push('1');
+        }
+    }
+    let gamma = u32::from_str_radix(&gamma.iter().collect::<String>(), 2).unwrap();
+    let epsilon = u32::from_str_radix(&epsilon.iter().collect::<String>(), 2).unwrap();
+    println!("{:?}" , gamma*epsilon);
+}
+
 fn part2(nums: &[u32], a: u32, b: u32) -> u32 {
     let mut nums = nums.to_vec();
     for i in (0..12).rev() {
@@ -41,4 +74,5 @@ fn main() {
 
         println!("{}", part1(&inp));
         println!("{}", part2(&inp, 1, 0) * part2(&inp, 0, 1));
+        part1_bad();
 }
