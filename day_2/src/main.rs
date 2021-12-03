@@ -27,7 +27,7 @@ fn solve(inp: String) -> (u32, u32) {
                 depth += x;
                 aim += x;
             }
-            _ => {}
+            _ => unreachable!(),
         }
     }
     (length * depth, length * depth2)
